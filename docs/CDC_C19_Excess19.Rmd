@@ -11,7 +11,7 @@ output:
 
 What would the Securities & Exchange Commission do if Home Depot reported as its 2020 "net income" only its revenues (not expenses), from only its best eight months, in only its best 18 states? What if we replace "Home Depot" with "CDC"? Which organization should be held to higher accounting and disclosure standards? Which has more power to damage the United States with misleading information?
 
-In 2020, the CDC's [budget ballooned from \$8 billion](https://www.cdc.gov/budget/documents/fy2020/fy-2020-cdc-operating-plan.pdf) to roughly [\$46 billion](https://www.cdc.gov/budget/fact-sheets/covid-19/index.html), all in response to perceived Covid-19 mortality. How many deaths has Covid-19 caused? Causal analysis is always a tricky business,[^1] but pinpointing cause of death is notoriously error-prone,[^2] more so because reported cause of death is used to justify funding increases. Indeed, the CDC emphasizes the funding connection twice on the first page of its 65-page death certificate handbook.[^3] In support of its remarkable budget increase, and claiming concern that death-certificate-based counts were under-counting Covid-19 deaths, in fall 2020, the CDC began estimating "excess" deaths as a proxy for Covid-19 deaths.
+In 2020, the CDC's [budget ballooned from \$8 billion](https://www.cdc.gov/budget/documents/fy2020/fy-2020-cdc-operating-plan.pdf) to roughly [\$46 billion](https://www.cdc.gov/budget/fact-sheets/covid-19/index.html), all in response to perceived Covid-19 mortality. How many deaths has Covid-19 caused? Causal analysis is always a tricky business,[^1] but pinpointing cause of death is notoriously error-prone,[^2] more so when a reported cause is used to solicit billions in funding. Indeed, the CDC emphasizes the funding connection twice on the first page of its 65-page death certificate handbook.[^3] In support of its remarkable budget increase, and claiming concern that death-certificate-based counts were under-counting Covid-19 deaths, in fall 2020, the CDC began estimating "excess" deaths as a proxy for Covid-19 deaths.
 
 [^1]: See, e.g., Judea Pearl & Dana Mackenzie, *The Book of Why: The New Science of Cause and Effect* (2018).
 
@@ -168,7 +168,7 @@ pdata %>%
 
 ```
 
-Of these numbers, which deserve to be "expected" in Nebraska and NYC in 2020 Week 15? Statistically speaking, none of them. That's right: *None* of these numbers was individually probable at all because probability attaches only to ranges, not to point-estimates. For the record, here are the reported Week 15 results:
+Of these numbers, which deserves to be the chosen, "expected" one in Nebraska and NYC in 2020 Week 15? Statistically speaking, none of them. That's right: *None* of these numbers was individually probable at all because probability attaches only to ranges, not to point-estimates. For the record, here are the reported Week 15 results:
 
 ```{r}
 filter(pcap_long, Juris %in% c("New York City", "Nebraska") & Cause %in% c("All") & `MMWR Week` %in% c("15") & Year %in% c("2020")) %>% 
