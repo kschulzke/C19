@@ -2,10 +2,9 @@
 title: "Home Depot, Hogwarts & Excess Deaths at the CDC"
 output:
   html_notebook: default
-  
 ---
 
-#### by Kurt Schulzke
+#### Kurt Schulzke, JD, CPA, CFE
 
 ## I. Introduction
 
@@ -19,13 +18,19 @@ In 2020, the CDC's [budget ballooned from \$8 billion](https://www.cdc.gov/budge
 
 [^3]: The CDC's 65-page instruction book, <https://www.cdc.gov/nchs/data/misc/hb_cod.pdf>, explains how to complete the death certificate at <https://www.cdc.gov/nchs/data/dvs/blue_form.pdf>.
 
-To be clear, the CDC's estimate is not data. It is an *estimate*, which means it is one judgmental interpretation of data among multiple possible interpretations. Is the CDC's estimate realistic? To find out, we will explore the CDC's data and evaluate the model they used to make their estimate. 
+To be clear, the CDC's estimate is not data. It is an *estimate*, which means it is one judgmental interpretation of data among multiple possible interpretations. Is the CDC's estimate realistic? To find out, we will explore the CDC's data and evaluate the model they used to make their estimate.
 
-The key high-level questions are these: What is the plausible range of "excess" deaths in a relevant place over a relevant time period? What share of excess deaths might be fairly attributed to Covid-19? And how transparently does the CDC present the range and share to readers? We offer some answers to these questions in Part V. We'll keep things simple and (mostly) visual, avoiding complex statistical tools. 
+The key high-level questions are these: What is the plausible range of "excess" deaths in a relevant place over a relevant time period? What share of excess deaths might be fairly attributed to Covid-19? And how transparently does the CDC present the range and share to readers? We offer some answers to these questions in Part V. We'll keep things simple and (mostly) visual, avoiding complex statistical tools.
 
-As we go forward, note that the SEC's fundamental "anti-fraud" standard, [Rule 10b-5](https://www.law.cornell.edu/cfr/text/17/240.10b-5), declares it illegal to do any of the following in buying or selling stocks: (a) employ any device, scheme, or artifice to defraud, (b) make any untrue statement of a material fact or to omit to state a material fact necessary in order to make the statements made, in the light of the circumstances under which they were made, not misleading, or (c) engage in any act, practice, or course of business which operates or would operate as a fraud or deceit upon any person.
+At the outset, we note that the SEC's fundamental "anti-fraud" standard, [Rule 10b-5](https://www.law.cornell.edu/cfr/text/17/240.10b-5), declares it illegal, in buying or selling stocks, to (a) employ any device, scheme, or artifice to defraud, (b) mislead readers by statements or omissions, or (c) engage in any act, practice, or course of business which operates as a fraud or deceit upon anyone.
 
-Let's see how the CDC measures up. 
+Let's see how the CDC measures up to stock market disclosure requirements. In doing so, we'll generally follow the AICPA standard for auditing management estimates, SAS 143, which admonishes that the importance of professional skepticism:
+
+> ...increases when accounting estimates are subject to a greater degree of estimation uncertainty or are affected to a greater degree by complexity, subjectivity, or other inherent risk factors. Similarly, the exercise of professional skepticism is important when there is greater susceptibility to misstatement due to management bias or fraud.[^4]
+
+[^4]: SAS 143, para. 7 (AICPA 2020).
+
+In this connection, we should consider the impact of the "[fraud triangle](https://corporatefinanceinstitute.com/resources/knowledge/accounting/fraud-triangle/)," which holds that opportunities, incentives, and easily accessible rationalizations heighten fraud risk.
 
 Before we engage the CDC's model, we'll peek at the "raw" data (scaled to per thousand population) while keeping in mind that it is curated by the [NCHS](https://www.cdc.gov/nchs/about/organization.htm), a division of the CDC. We'll assume that the data are what the [CDC says they are](https://data.cdc.gov/NCHS/Weekly-Counts-of-Deaths-by-State-and-Select-Causes/muzy-jte6): unvarnished, reported deaths data. An audit would be required to verify the validity of this assumption. For context, the [U.S. crude annual mortality rate](https://data.worldbank.org/indicator/SP.DYN.CDRT.IN?locations=US) has recently averaged 8-9 nationally, ranging between 12.5 (WV) and 9 (Alaska). And, according to the CDC, the 1918 flu killed [675,000](https://www.cdc.gov/flu/pandemic-resources/1918-pandemic-h1n1.html) out of 103 million Americans (6.6 DPT).
 
@@ -66,15 +71,15 @@ Fig_2.2 <- suppressMessages(print(ByStates1420nin(c("United States", "New York C
 
 Removing the Tri-state drops the *national* spring 2020 peak below January 2018. The line then morphs into a serpentine spring-summer-fall that would make Hogwarts and Loch Ness proud. It's almost as if the peak that no-showed in January 2019 was "[apparated](https://harrypotter.fandom.com/wiki/Apparition)" into spring and summer 2020. Maybe, outside of the first-hit Tri-state -- which spiked the 2020 national high over the (green) 2018 flu line -- the spring 2020 school and business closures that occurred in many states (e.g., Georgia) merely smoothed deaths into the summer. We can search for the serpent in the state data, though this won't guarantee that the data can be trusted. First, let's talk modeling excess deaths.
 
-Excess deaths are estimated, not counted. They are a function of both the estimator's subjective judgments and objective data. It is widely accepted that *estimated* excess deaths equals *reported* deaths from all causes in excess of *estimated* "expected" deaths over a given time period in a chosen geographical area. In theory, excess deaths may result from some novel cause or causes like, e.g., Covid-19 and societal responses to it. However, the [CDC states](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm) that Covid-19 may *not* be the cause of *any* of the CDC's estimated excess deaths.[^4] Similarly, an excess of zero or less is some evidence that no novel cause is killing large numbers of people who would not die anyway. So the debate centers on the meaning and estimation of the *plausible range* of expected deaths, the proper time and geography *subsets* to use for comparing expected to actual deaths, how to *present* the comparison, and *what share* of the excess, if any, to attribute to particular plausible causes (e.g., Covid-10).
+Excess deaths are estimated, not counted. They are a function of both the estimator's subjective judgments and objective data. It is widely accepted that *estimated* excess deaths equals *reported* deaths from all causes in excess of *estimated* "expected" deaths over a given time period in a chosen geographical area. In theory, excess deaths may result from some novel cause or causes like, e.g., Covid-19 and societal responses to it. However, the [CDC states](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm) that Covid-19 may *not* be the cause of *any* of the CDC's estimated excess deaths.[^5] Similarly, an excess of zero or less is some evidence that no novel cause is killing large numbers of people who would not die anyway. So the debate centers on the meaning and estimation of the *plausible range* of expected deaths, the proper time and geography *subsets* to use for comparing expected to actual deaths, how to *present* the comparison, and *what share* of the excess, if any, to attribute to particular plausible causes (e.g., Covid-10).
 
-[^4]: "Finally, the estimates of excess deaths reported here may not be due to COVID-19, either directly or indirectly." Technical Notes, <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
+[^5]: "Finally, the estimates of excess deaths reported here may not be due to COVID-19, either directly or indirectly." Technical Notes, <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
 
-In its [October 23, 2020 Morbidity and Mortality Weekly Report](https://www.cdc.gov/mmwr/volumes/69/wr/mm6942e2.htm) (MMWR), the CDC published 299,028 as its estimate of nationwide *excess* deaths, from Feb 1 to Oct 3, 2020. It attributed \~2/3 of these (198,081) to Covid-19.[^5] This 198,081 number, apparently based largely on PCR test positives, may be significantly overstated, particularly in light of the WHO's [Jan 20, 2021 Notice](https://www.who.int/news/item/20-01-2021-who-information-notice-for-ivd-users-2020-05) warning, contrary to longstanding CDC Covid-19 dogma, that a single PCR test positive alone does not justify a "Covid-19" diagnosis.[^6]
+In its [October 23, 2020 Morbidity and Mortality Weekly Report](https://www.cdc.gov/mmwr/volumes/69/wr/mm6942e2.htm) (MMWR), the CDC published 299,028 as its estimate of nationwide *excess* deaths, from Feb 1 to Oct 3, 2020. It attributed \~2/3 of these (198,081) to Covid-19.[^6] This 198,081 number, apparently based largely on PCR test positives, may be significantly overstated, particularly in light of the WHO's [Jan 20, 2021 Notice](https://www.who.int/news/item/20-01-2021-who-information-notice-for-ivd-users-2020-05) warning, contrary to longstanding CDC Covid-19 dogma, that a single PCR test positive alone does not justify a "Covid-19" diagnosis.[^7]
 
-[^5]: See [\<https://www.cdc.gov/mmwr/volumes/69/wr/mm6942e2.htm\>](https://www.cdc.gov/mmwr/volumes/69/wr/mm6942e2.htm). The 198,081 "attributed" to Covid-19 apparently represents deaths what the CDC calls "confirmed or presumed COVID-19 deaths." By "confirmed," the CDC means that the decedent at some point received a positive PCR test result, suggesting the presence of SARS-COV-2 virus.
+[^6]: See [\<https://www.cdc.gov/mmwr/volumes/69/wr/mm6942e2.htm\>](https://www.cdc.gov/mmwr/volumes/69/wr/mm6942e2.htm). The 198,081 "attributed" to Covid-19 apparently represents deaths what the CDC calls "confirmed or presumed COVID-19 deaths." By "confirmed," the CDC means that the decedent at some point received a positive PCR test result, suggesting the presence of SARS-COV-2 virus.
 
-[^6]: "The cycle threshold (Ct) needed to detect virus is inversely proportional to the patient's viral load. Where test results do not correspond with the clinical presentation, a new specimen should be taken and retested using the same or different NAT technology."
+[^7]: "The cycle threshold (Ct) needed to detect virus is inversely proportional to the patient's viral load. Where test results do not correspond with the clinical presentation, a new specimen should be taken and retested using the same or different NAT technology."
 
 That said, in the MMWR, the CDC states that excess deaths "have been used to estimate the impact of public health pandemics or disasters, particularly when there are questions about underascertainment of deaths directly attributable to a given event or cause." This implies, misleadingly, that excess deaths are not also useful for exposing suspected over-counts.
 
@@ -90,9 +95,9 @@ filter(Wtd_CDC_C19_Ex, !Code == "US" & `Week Ending Date` > "2020-01-31" & `Week
   summarise(Excess = sum(`Excess Lower Estimate`)*2/3)
 ```
 
-But this 8-month, *gross* national estimate, based on [multiple by-state-by-week statistical models](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm),[^7] is misleading. This is partly because it arbitrarily cherry-picks eight months instead of twelve. And not just any eight months. Starting the count just as deaths were about to spike in the Tri-state is like Home Depot reporting profits for only its *best* eight months. It also implies that a nationwide estimate is meaningful when, because of diversity among states and regions, it is not.
+But this 8-month, *gross* national estimate, based on [multiple by-state-by-week statistical models](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm),[^8] is misleading. This is partly because it arbitrarily cherry-picks eight months instead of twelve. And not just any eight months. Starting the count just as deaths were about to spike in the Tri-state is like Home Depot reporting profits for only its *best* eight months. It also implies that a nationwide estimate is meaningful when, because of diversity among states and regions, it is not.
 
-[^7]: See <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
+[^8]: See <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
 
 Yet questions regarding the CDC estimate -- involving binning, netting, algorithm choice, estimation uncertainty, and training data -- run much deeper. And the net impact of Covid-19 where you live is probably much less than the CDC's national estimate suggests. In most states, according to the CDC's own "provisional" numbers, the net impact of Covid-19 for the year ended September 30, 2020 was zero or less, if we use the lower side of the CDC's estimate. What? The CDC's estimate is two-sided, you ask? Yes, of course. More than two-sided. This is true of *every* estimate. Numbers can be spun in many directions. Estimates and their interpretation are as much art as science, and estimates cover a *range* of possibilities. In the CDC's case, the range is very wide. Let's consider how and why.
 
@@ -106,9 +111,9 @@ We'll comment briefly on each of these issues in the sections that follow.
 
 ### A. Netting & binning
 
-The [CDC's excess deaths model](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm) (we'll call them "surplus" deaths) predicts how many people will die in *each week* of the year in *each state*. These weekly-by-state *predictions* are then compared to *reported* deaths. If the reported deaths exceed predicted deaths in a given week, that excess counts toward surplus deaths. However, any deficit (i.e., where predicted deaths exceed reported) is counted as zero.[^8] The CDC then reports the sum of these weekly, gross surpluses as U.S. excess deaths.
+The [CDC's excess deaths model](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm) (we'll call them "surplus" deaths) predicts how many people will die in *each week* of the year in *each state*. These weekly-by-state *predictions* are then compared to *reported* deaths. If the reported deaths exceed predicted deaths in a given week, that excess counts toward surplus deaths. However, any deficit (i.e., where predicted deaths exceed reported) is counted as zero.[^9] The CDC then reports the sum of these weekly, gross surpluses as U.S. excess deaths.
 
-[^8]: "Negative values, where the observed count fell below the thresholds, were set to zero... The total number of excess deaths in each state was calculated by summing the excess deaths in each week, from February 1, 2020 to present." <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
+[^9]: "Negative values, where the observed count fell below the thresholds, were set to zero... The total number of excess deaths in each state was calculated by summing the excess deaths in each week, from February 1, 2020 to present." <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
 
 Let's use Georgia as an example. Figure 3, copied from the [CDC's website](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm), illustrates the impact of the CDC's netting and binning choices on Georgia's surplus deaths. The blue vertical bars show reported deaths adjusted for the CDC's assumptions about incomplete reporting. The brown line visualizes the *mean* CDC expected deaths produced by the model. The differences between the brown line and the top of the blue bars--in yellow highlight--equals the deficit or surplus deaths per week, but only if we use the *mean* expected-death threshold. If the CDC's dashboard allowed us to use the upper-bound expected deaths, the brown line would rise and the yellow zone would expand considerably.
 
@@ -140,21 +145,21 @@ The CDC attempts to rationalize this surplus-only accounting by arguing that som
 
 And let's not forget that the numbers used by the CDC to recommend nationwide lock downs in the spring of 2020 were beyond "incomplete": they were largely imaginary. So while deficits for some slow jurisdictions (e.g., North Carolina) might warrant "deferred netting," permanently hiding the deficits finds no scientific justification.
 
-At the national level, by netting estimated deficits against estimated surpluses[^9] and reporting the entire Sep 30, 2020 year (instead of just eight months), the CDC's 299K mean-based estimate drops to about 60K.[^10] Why didn't the CDC bin annually? One possible motive is suggested by the R package -- [surveillance](https://cran.r-project.org/web/packages/surveillance/surveillance.pdf) -- used by the CDC to develop its model.[^11] But annual binning is not the only option. Figure 2 suggests that total deaths are seasonal, cyclical, and gradually trending upward, naturally cycling through ever-higher highs every 2-3 years. Thus, biennial or triennial bins might be more informative. Whatever the binning window, deficits must be counted.
+At the national level, by netting estimated deficits against estimated surpluses[^10] and reporting the entire Sep 30, 2020 year (instead of just eight months), the CDC's 299K mean-based estimate drops to about 60K.[^11] Why didn't the CDC bin annually? One possible motive is suggested by the R package -- [surveillance](https://cran.r-project.org/web/packages/surveillance/surveillance.pdf) -- used by the CDC to develop its model.[^12] But annual binning is not the only option. Figure 2 suggests that total deaths are seasonal, cyclical, and gradually trending upward, naturally cycling through ever-higher highs every 2-3 years. Thus, biennial or triennial bins might be more informative. Whatever the binning window, deficits must be counted.
 
-[^9]: The underlying CDC figures are in the worksheet at <https://data.cdc.gov/api/views/xkkf-xrst/rows.csv?accessType=DOWNLOAD&bom=true&format=true%20target=>
+[^10]: The underlying CDC figures are in the worksheet at <https://data.cdc.gov/api/views/xkkf-xrst/rows.csv?accessType=DOWNLOAD&bom=true&format=true%20target=>
 
-[^10]: For its national estimate, the CDC omitted North Carolina because of incomplete reporting.
+[^11]: For its national estimate, the CDC omitted North Carolina because of incomplete reporting.
 
-[^11]: The surveillance package was built to assist public health authorities in "lessening disease burden by, e.g., timely recognizing emerging outbreaks in case of infectious diseases." In other words, it was created to locate epidemic outbreaks for possible short-term intervention, not to estimate excess deaths for long-term policy formulation. *See* Maëlle Salmon, Dirk Schumacher & Michael Höhle, "Monitoring Count Time Series in R: Aberration Detection in Public Health Surveillance," J. Statistical Software (2016), <https://www.jstatsoft.org/article/view/v070i10>.
+[^12]: The surveillance package was built to assist public health authorities in "lessening disease burden by, e.g., timely recognizing emerging outbreaks in case of infectious diseases." In other words, it was created to locate epidemic outbreaks for possible short-term intervention, not to estimate excess deaths for long-term policy formulation. *See* Maëlle Salmon, Dirk Schumacher & Michael Höhle, "Monitoring Count Time Series in R: Aberration Detection in Public Health Surveillance," J. Statistical Software (2016), <https://www.jstatsoft.org/article/view/v070i10>.
 
 Beyond netting and time binning, geographical binning also affects the reported surplus. It does so at two levels: prediction and reporting. *First*, the CDC's state-based prediction model produces surpluses that are [25% higher](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm) than they would be if the model were run at the national level. *Second*, putting the entire U.S. into a single geographic bucket obscures important regional and state-level differences. For example, using annual binning (9-30 YE) *and* dropping the Tri-state area from the national estimate reduces national surplus deaths to \~13K. Tri-state added \~41K surplus deaths to the national total. We'll look more closely at state and regional differences in Part IV.
 
 ### B. Uncertainty
 
-Two issues are of concern here. *First*, the CDC MMWR claims an impossible degree of estimating precision, reporting its national (and state) estimates to single deaths, e.g., "299,028," instead of rounding, e.g., "299K," or stating a range, "50K-299K." Given the many subjective assumptions involved, such precision is misleading. While the CDC explains most of its assumptions and notes that its model produces "expected" and "upper bound" point estimates,[^12] it nevertheless promotes the illusion of precision through its public-facing media like the MMWR. This conveys the false impression that the estimate is more certain than it is. Modeling is a mix of subjective judgment and objective science. The CDC should make this clear.
+Two issues are of concern here. *First*, the CDC MMWR claims an impossible degree of estimating precision, reporting its national (and state) estimates to single deaths, e.g., "299,028," instead of rounding, e.g., "299K," or stating a range, "50K-299K." Given the many subjective assumptions involved, such precision is misleading. While the CDC explains most of its assumptions and notes that its model produces "expected" and "upper bound" point estimates,[^13] it nevertheless promotes the illusion of precision through its public-facing media like the MMWR. This conveys the false impression that the estimate is more certain than it is. Modeling is a mix of subjective judgment and objective science. The CDC should make this clear.
 
-[^12]: See <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
+[^13]: See <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
 
 *Second*, aside from inflated claims of precision, point estimates -- which is all the CDC offers on its dashboard -- are inadequate to support responsible policy. Are 10-20K excess deaths more or less probable than 190-200K? While the notes refer to upper-bound and mean *expected* deaths, the dashboard (see Fig. 3, brown line) shows only the mean value and prevents readers from accessing the upper-bound.
 
@@ -196,9 +201,9 @@ ggplot(data = filter(GA_CDCvDPH, `MMWR Week` %in% c(1:52)), aes(x = `MMWR Week`,
   labs(title = "Georgia Covid-19 vs. CDC upper-bound excess (DPT)", subtitle = "2020 MMWR Weeks 1-52", y = "Deaths Per Thousand", x = "MMWR Week", tag = "Fig. 4", caption = "Sources: CDC; Georgia DPH; www2.census.gov \n 'GADPH' = Deaths reported by GA DPH as Covid-19 deaths \n 'CDC' = Excess of deaths from all causes over CDC upper-bound expected deaths")
 ```
 
-Figure 4 shows a close correlation, in weeks 5-48, between Georgia's reported Covid-19 deaths (classified as such based primarily on positive PCR test results) and the CDC's modeled, low-end excess deaths estimate (based on the CDC's upper-bound expected deaths). If we assume the accuracy of Georgia's PCR-identified Covid-19 deaths and that all excess deaths were caused by Covid-19,[^13] this correlation suggests that the CDC's upper-bound expectation is closer to reality than the mean shown on the CDC dashboard. This points to net excess deaths (from all causes, for the 9-30 year) centered on 19K and 60K for the U.S. without and with Tri-state, respectively.
+Figure 4 shows a close correlation, in weeks 5-48, between Georgia's reported Covid-19 deaths (classified as such based primarily on positive PCR test results) and the CDC's modeled, low-end excess deaths estimate (based on the CDC's upper-bound expected deaths). If we assume the accuracy of Georgia's PCR-identified Covid-19 deaths and that all excess deaths were caused by Covid-19,[^14] this correlation suggests that the CDC's upper-bound expectation is closer to reality than the mean shown on the CDC dashboard. This points to net excess deaths (from all causes, for the 9-30 year) centered on 19K and 60K for the U.S. without and with Tri-state, respectively.
 
-[^13]: Georgia is a sample of one. We would need to test this correlation for more states in order to reach a more reliable conclusion on its meaning. Note, also, that the WHO's [January 20, 2021 Notice](https://www.who.int/news/item/20-01-2021-who-information-notice-for-ivd-users-2020-05) on Covid-19 diagnosis calls into question the accuracy of Covid-19 death reports from any state, like Georgia, which relies primarily on a single PCR test positive for classifying "cases" and deaths as Covid-19.
+[^14]: Georgia is a sample of one. We would need to test this correlation for more states in order to reach a more reliable conclusion on its meaning. Note, also, that the WHO's [January 20, 2021 Notice](https://www.who.int/news/item/20-01-2021-who-information-notice-for-ivd-users-2020-05) on Covid-19 diagnosis calls into question the accuracy of Covid-19 death reports from any state, like Georgia, which relies primarily on a single PCR test positive for classifying "cases" and deaths as Covid-19.
 
 ```{r}
 
@@ -220,15 +225,15 @@ In summary, the inherent uncertainty of these estimates demands more clarity and
 
 ### C. Loss function
 
-Whatever the model, the user must decide how many deaths are too many. What number of deaths requires policy interventions like business closures, social distancing, masks, or vaccination? The CDC's own excess deaths model points to ten deaths per state per week as the lower bound. The [Technical Notes](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm) state that weekly counts "between 1 and 9 are suppressed."[^14] In other words, nine or fewer deaths are not tracked at all by the CDC. This suggests that the CDC believes that less than ten deaths per state per week should not impact public policy. Another benchmark might be the 1918-19 flu pandemic, with an estimated toll of 6.6 DPT. Through September 30, 2020, the CDC's own 200K gross, mean-based estimate equated to only 0.60 DPT. After netting, the upper-bound based estimate was 0.18 (0.06) with (without) Tri-state.
+Whatever the model, the user must decide how many deaths are too many. What number of deaths requires policy interventions like business closures, social distancing, masks, or vaccination? The CDC's own excess deaths model points to ten deaths per state per week as the lower bound. The [Technical Notes](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm) state that weekly counts "between 1 and 9 are suppressed."[^15] In other words, nine or fewer deaths are not tracked at all by the CDC. This suggests that the CDC believes that less than ten deaths per state per week should not impact public policy. Another benchmark might be the 1918-19 flu pandemic, with an estimated toll of 6.6 DPT. Through September 30, 2020, the CDC's own 200K gross, mean-based estimate equated to only 0.60 DPT. After netting, the upper-bound based estimate was 0.18 (0.06) with (without) Tri-state.
 
-[^14]: CDC, Excess Deaths Associated with COVID-19, Technical Notes, <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>
+[^15]: CDC, Excess Deaths Associated with COVID-19, Technical Notes, <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>
 
-This is not to say that ten is certainly the right threshold but merely that there is a number, ten or higher per week per state, below which government intervention is over-kill. The threshold is a value judgment related to an equally judgmental loss function that should balance or "net" costs and benefits.[^15] Isolating a nursing home patient may prevent a Covid-19 infection at the expense of inducing severe depression or suicide. Shuttering restaurants and concerts may reduce Covid-19 deaths while killing restaurant operators and musicians by starvation and dramatically reducing the quality of life for millions. Oxford epidemiologist [Sunetra Gupta calls](https://gbdeclaration.org/video/) this a violation of the "social contract:"[^16]
+This is not to say that ten is certainly the right threshold but merely that there is a number, ten or higher per week per state, below which government intervention is over-kill. The threshold is a value judgment related to an equally judgmental loss function that should balance or "net" costs and benefits.[^16] Isolating a nursing home patient may prevent a Covid-19 infection at the expense of inducing severe depression or suicide. Shuttering restaurants and concerts may reduce Covid-19 deaths while killing restaurant operators and musicians by starvation and dramatically reducing the quality of life for millions. Oxford epidemiologist [Sunetra Gupta calls](https://gbdeclaration.org/video/) this a violation of the "social contract:"[^17]
 
-[^15]: *See, generally*, Austin Frakt, "Putting a Dollar Value on Life? Governments Already Do," NYT (May 11, 2020), <https://www.nytimes.com/2020/05/11/upshot/virus-price-human-life.html>.
+[^16]: *See, generally*, Austin Frakt, "Putting a Dollar Value on Life? Governments Already Do," NYT (May 11, 2020), <https://www.nytimes.com/2020/05/11/upshot/virus-price-human-life.html>.
 
-[^16]: Sunetra Gupta discusses the epidemiological "social contract" at 1:46 - 1:51 of the video at <https://gbdeclaration.org/video/>.
+[^17]: Sunetra Gupta discusses the epidemiological "social contract" at 1:46 - 1:51 of the video at <https://gbdeclaration.org/video/>.
 
 > Why don't we do this for the flu? What's the contract here? ... We want schools to remain open, we want people to flourish, we want inequality not to get any worse. We want the arts... What are we alive for? We put all of these things on a plane ... and we say, 'Okay, we're going to tolerate this level of disease in the population. It will kill some people. We will try and protect them.' We just do our best within that context, within those boundaries to try and make it all work." I think that's the social contract ... and that's what's being ignored."
 
@@ -236,11 +241,11 @@ How do 0.06 to 0.85 deaths per thousand fit into the social contract? Where do *
 
 ### D. Algorithm
 
-The CDC uses the Farrington algorithm to model expected deaths but does not identify alternatives or compare Farrington to them.[^17] [Schumacher et al](https://www.jstatsoft.org/article/view/v070i10), cited in the CDC's Technical Notes, say that Farrington "only performs one time-point detection" of outbreaks.[^18] In order to fully and fairly evaluate the model, we need to see the code. The CDC should publish its R code and explain *why* the Farrington method is suitable at all and *why* it is better than alternatives.
+The CDC uses the Farrington algorithm to model expected deaths but does not identify alternatives or compare Farrington to them.[^18] [Schumacher et al](https://www.jstatsoft.org/article/view/v070i10), cited in the CDC's Technical Notes, say that Farrington "only performs one time-point detection" of outbreaks.[^19] In order to fully and fairly evaluate the model, we need to see the code. The CDC should publish its R code and explain *why* the Farrington method is suitable at all and *why* it is better than alternatives.
 
-[^17]: I gather from the [footnotes](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm), that "Farrington" means farringtonFlexible, discussed in the [surveillance package user manual](https://cran.r-project.org/web/packages/surveillance/surveillance.pdf). Other possibilities are algo.farrington and algo.cdc (based on Farrington).The Farrington algo assumes that events (e.g., deaths) occur frequencies prescribed by the Poisson distribution, which is nicely explained in [this zedstatistics video](https://www.youtube.com/watch?v=cPOChr_kuQs). It would help greatly if the CDC were to publicly share its code.
+[^18]: I gather from the [footnotes](https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm), that "Farrington" means farringtonFlexible, discussed in the [surveillance package user manual](https://cran.r-project.org/web/packages/surveillance/surveillance.pdf). Other possibilities are algo.farrington and algo.cdc (based on Farrington).The Farrington algo assumes that events (e.g., deaths) occur frequencies prescribed by the Poisson distribution, which is nicely explained in [this zedstatistics video](https://www.youtube.com/watch?v=cPOChr_kuQs). It would help greatly if the CDC were to publicly share its code.
 
-[^18]: Salmon M, Schumacher D, Hohle M. Monitoring Count Time Series in R: Aberration Detection in Public Health Surveillance. *Journal of Statistical Software* 2016;70(10):1-35, 14.
+[^19]: Salmon M, Schumacher D, Hohle M. Monitoring Count Time Series in R: Aberration Detection in Public Health Surveillance. *Journal of Statistical Software* 2016;70(10):1-35, 14.
 
 ### E. Training Data
 
@@ -248,19 +253,19 @@ Like all models, the CDC's excess deaths model was "trained" on historical data.
 
 ## III. Data & Code
 
-The Part IV analysis[^19] -- primarily in the form of visualizations and commentary -- focuses on three bodies of data: 1. U.S. mortality from all causes by age, time, and place (NCHS),[^20] 2. Excess Deaths Associated with Covid-19 (NCHS),[^21] and 3. a [Covid-19 tracking spreadsheet](https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip) produced by the Georgia Department of Public Health. Population denominators for per-thousand figures and, for cross-validation, annual deaths, are from the U.S. Census.[^22]
+The Part IV analysis[^20] -- primarily in the form of visualizations and commentary -- focuses on three bodies of data: 1. U.S. mortality from all causes by age, time, and place (NCHS),[^21] 2. Excess Deaths Associated with Covid-19 (NCHS),[^22] and 3. a [Covid-19 tracking spreadsheet](https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip) produced by the Georgia Department of Public Health. Population denominators for per-thousand figures and, for cross-validation, annual deaths, are from the U.S. Census.[^23]
 
-[^19]: The analysis was inspired in part by [Genevieve Briand's November 2020 presentation](https://www.youtube.com/watch?v=3TKJN61aflI&feature=youtu.be) at John Hopkins University in which Briand suggested that Covid-19 should not be credited with any excess deaths in the United States.
+[^20]: The analysis was inspired in part by [Genevieve Briand's November 2020 presentation](https://www.youtube.com/watch?v=3TKJN61aflI&feature=youtu.be) at John Hopkins University in which Briand suggested that Covid-19 should not be credited with any excess deaths in the United States.
 
-[^20]: CDC data sources: <https://data.cdc.gov/NCHS/Provisional-COVID-19-Death-Counts-by-Sex-Age-and-W/vsak-wrfu>, <https://data.cdc.gov/NCHS/Weekly-Counts-of-Deaths-by-State-and-Select-Causes/3yf8-kanr,> and <https://data.cdc.gov/NCHS/Weekly-Counts-of-Deaths-by-State-and-Select-Causes/muzy-jte6.>
+[^21]: CDC data sources: <https://data.cdc.gov/NCHS/Provisional-COVID-19-Death-Counts-by-Sex-Age-and-W/vsak-wrfu>, <https://data.cdc.gov/NCHS/Weekly-Counts-of-Deaths-by-State-and-Select-Causes/3yf8-kanr,> and <https://data.cdc.gov/NCHS/Weekly-Counts-of-Deaths-by-State-and-Select-Causes/muzy-jte6.>
 
-[^21]: See <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
+[^22]: See <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
 
-[^22]: Census data sources: <http://www2.census.gov/programs-surveys/popest/datasets/2010-2019/national/totals/nst-est2019-alldata.csv>, and <https://www.census.gov/data/tables/time-series/demo/popest/2010s-total-cities-and-towns.html#ds>.
+[^23]: Census data sources: <http://www2.census.gov/programs-surveys/popest/datasets/2010-2019/national/totals/nst-est2019-alldata.csv>, and <https://www.census.gov/data/tables/time-series/demo/popest/2010s-total-cities-and-towns.html#ds>.
 
-The code used to wrangle and transform the data appears in the Appendix. All coding was done in [R Studio](https://rstudio.com/) using [tidyverse](https://www.tidyverse.org/)[^23] and other R packages identified in the first code chunk. The code can be hidden or revealed by toggling the Code button in the top right corner of this html document and before each code chunk. The full R Studio .Rmd file can also be downloaded through the same button. I provide the code, submit to the MIT open source license, to encourage others to extend the analysis.
+The code used to wrangle and transform the data appears in the Appendix. All coding was done in [R Studio](https://rstudio.com/) using [tidyverse](https://www.tidyverse.org/)[^24] and other R packages identified in the first code chunk. The code can be hidden or revealed by toggling the Code button in the top right corner of this html document and before each code chunk. The full R Studio .Rmd file can also be downloaded through the same button. I provide the code, submit to the MIT open source license, to encourage others to extend the analysis.
 
-[^23]: Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). "Welcome to the tidyverse." *Journal of Open Source Software*, **4**(43), 1686. doi: [10.21105/joss.01686](https://doi.org/10.21105/joss.01686).
+[^24]: Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). "Welcome to the tidyverse." *Journal of Open Source Software*, **4**(43), 1686. doi: [10.21105/joss.01686](https://doi.org/10.21105/joss.01686).
 
 ## IV. Analysis
 
@@ -353,9 +358,9 @@ ByStates1420(c("Washington", "Oregon", "Idaho", "California"), c("Fig. 13"), c("
 
 ### B. Layered years
 
-Layered smooth-line plots[^24] offer a different view of state DPT deltas. Faceting the plots facilitates state-to-state comparisons. Interpret these plots with caution because 1. the y-axes are very narrow; those hills and spikes typically reach no more than 0.10 DPT over the lows; 2. the y-axes are different for every panel; and 3. the smoothing function "smooths" extreme values in order to expose larger patterns; thus, the deltas won't look as wide as they do in previous figures.
+Layered smooth-line plots[^25] offer a different view of state DPT deltas. Faceting the plots facilitates state-to-state comparisons. Interpret these plots with caution because 1. the y-axes are very narrow; those hills and spikes typically reach no more than 0.10 DPT over the lows; 2. the y-axes are different for every panel; and 3. the smoothing function "smooths" extreme values in order to expose larger patterns; thus, the deltas won't look as wide as they do in previous figures.
 
-[^24]: Smooth lines were fitted using LOESS smoothing implemented in R through the geom_smooth function of the ggplot2 package. LOESS smoothing is "a non-parametric form of regression that uses a weighted, sliding-window average to calculate a line of best fit." Wickham H (2016). *ggplot2: Elegant Graphics for Data Analysis*. Springer-Verlag New York. ISBN 978-3-319-24277-4, <https://ggplot2.tidyverse.org>.
+[^25]: Smooth lines were fitted using LOESS smoothing implemented in R through the geom_smooth function of the ggplot2 package. LOESS smoothing is "a non-parametric form of regression that uses a weighted, sliding-window average to calculate a line of best fit." Wickham H (2016). *ggplot2: Elegant Graphics for Data Analysis*. Springer-Verlag New York. ISBN 978-3-319-24277-4, <https://ggplot2.tidyverse.org>.
 
 #### 1. U.S.
 
@@ -403,9 +408,9 @@ YearLayers(c("New York City", "New York", "Connecticut", "New Jersey"), c("Fig. 
 
 ### C. Excess Deaths
 
-We now shift to estimates produced by the CDC's excess deaths model.[^25] The expected deaths are estimated and compared to reported deaths over time intervals or "bins." The CDC's model estimates expected deaths by state by week, then sums these estimates over some larger time period. We'll look at the twelve months beginning on October 1, 2019, which is when flu season typically starts in the northern hemisphere. This 9-30-20 year end excludes the last quarter of 2020, for which data for some states might be incomplete.
+We now shift to estimates produced by the CDC's excess deaths model.[^26] The expected deaths are estimated and compared to reported deaths over time intervals or "bins." The CDC's model estimates expected deaths by state by week, then sums these estimates over some larger time period. We'll look at the twelve months beginning on October 1, 2019, which is when flu season typically starts in the northern hemisphere. This 9-30-20 year end excludes the last quarter of 2020, for which data for some states might be incomplete.
 
-[^25]: The CDC's National and State Estimates of Excess Deaths worksheet is available in csv format at <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
+[^26]: The CDC's National and State Estimates of Excess Deaths worksheet is available in csv format at <https://www.cdc.gov/nchs/nvss/vsrr/covid19/excess_deaths.htm>.
 
 For the 9-30-20 year, absolute, net U.S. excess deaths ("net" means surpluses - deficits) based on the CDC's upper-bound (mean) expected deaths were 60K (286K) with Tri-state, and 19K (225K) without (see queries below). In other words, even the CDC's model recognizes a wide range of plausible estimates. In DPT, *with* the Tri-state the upper-bound-to-mean range is 0.18 - 0.87 or 0.06 - 0.69 *without* Tri-state, against an annual national mean DPT of about 8.6 over the 2017-2019 interval (see queries below). Without Tri-state, this means that the CDC's upper-bound total excess deaths, on the *high* side, were roughly 0.69/8.6 = 8% of a "normal" year. On the low side, this figure drops to 0.06/8.6 = 0.6%.
 
@@ -484,13 +489,13 @@ So let's summarize.
 
 *What is the plausible range of total "excess" deaths in a relevant place over a relevant time period?*
 
-The answer depends on where you live and the measurement window. No one lives everywhere across the United States. That said, the range for the year ended September 30, 2020 for United States most likely lies between 0.17 - 0.85 (0.03 - 0.67) DPT, including (excluding) the Tri-state. For most states individually, zero excess is plausible. Yet, this highly important fact goes unmentioned in the CDC's October 23 MMWR, which cherry-picks the Feb - Sep period and ignores deficits to produce 0.91 DPT (299,028/328 million/1,000) as the solitary point estimate for the entire country.
+The answer depends on where you live and the measurement window. No one lives everywhere across the United States. That said, the range for the year ended September 30, 2020 for United States most likely lies between 0.17 - 0.85 (0.03 - 0.67) DPT, including (excluding) the Tri-state. For most states individually, zero excess is plausible. Yet, this highly important fact goes unmentioned in the CDC's October 23 MMWR, which cherry-picks the Feb - Sep period and ignores deficits to produce 0.91 DPT (299,028/328 million/1,000) as the solitary point estimate for the entire country. Compare to the 1918 flu with a 6.6 DPT.
 
 *What share of excess deaths might be fairly attributed to Covid-19?*
 
 Small and getting smaller, especially in light of the WHO's [Jan 20, 2021 Notice](https://www.who.int/news/item/20-01-2021-who-information-notice-for-ivd-users-2020-05) warning that a PCR test positive should not be counted as "Covid-19" in the absence of a clinical diagnosis: "The cycle threshold (Ct) needed to detect virus is inversely proportional to the patient's viral load. Where test results do not correspond with the clinical presentation, a new specimen should be taken and retested using the same or different NAT technology."
 
-The vast majority of the fatalities are either (a) very elderly and, therefore, likely to die soon anyway, or (b) saddled with major comorbidities and ... likely to die soon anyway. Even the CDC admits, in print, that it does not know whether ANY of its estimated excess deaths were caused by Covid. All of this means that we should be looking beyond Covid-19 for full explanation of the Tri-state and other anomalies like the summer 2020 serpent.
+The vast majority of the fatalities are either (a) very elderly and, therefore, likely to die soon anyway, or (b) saddled with major comorbidities and ... likely to die soon anyway. Even the CDC admits, in print, that it does not know whether ANY of its estimated excess deaths were caused by Covid. All of this means that we should be looking beyond Covid-19 for a full explanation of the Tri-state and other anomalies like the summer 2020 serpent.
 
 *How transparently does the CDC present the range and share to readers?*
 
@@ -500,7 +505,7 @@ Perhaps most importantly, contrary to standard practice in research, the CDC mod
 
 > CONFLICT OF INTEREST: Covid-19 deaths are a proxy for CDC revenue. The CDC tends to receive more federal funding when the perceived epidemic death rate is high. In 2020, Congress increased our operating budget from \$8.5 billion to \$25 billion in response to Covid-19. Thus, this estimate may be affected by bias induced by our financial interest in higher reported Covid-19 deaths.
 
-Bottom line, the Securities & Exchange Commission requires corporate disclosures to be ["not materially misleading."](http://blogs2.law.columbia.edu/jtl/wp-content/uploads/sites/4/2018/01/Schulzke_56-CJTL-6-1.pdf) If held to to this standard, the CDC's excess deaths estimate, disclosures, and presentation thereof would need to change dramatically.
+Consistent with SEC Rule 10b-5, corporate disclosures [must not be "materially misleading](http://blogs2.law.columbia.edu/jtl/wp-content/uploads/sites/4/2018/01/Schulzke_56-CJTL-6-1.pdf)." The CDC's excess deaths estimate, disclosures, and presentation thereof would need to change dramatically to meet this minimum standard.
 
 ## Appendix
 
